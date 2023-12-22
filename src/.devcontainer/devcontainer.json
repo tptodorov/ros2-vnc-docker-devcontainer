@@ -1,0 +1,34 @@
+{
+    "name": "ROS 2 Development Container",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "workspaceFolder": "/home/ubuntu",
+    "workspaceMount": "source=${localWorkspaceFolder},target=/home/ubuntu/src,type=bind",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vscode.cpptools",
+                "ms-vscode.cpptools-themes",
+                "twxs.cmake",
+                "donjayamanne.python-extension-pack",
+                "eamodio.gitlens",
+                "ms-iot.vscode-ros"
+            ]
+        }
+    },
+    "forwardPorts": [
+        "6080:80"
+    ],
+    "runArgs": [
+        "--security-opt",
+        "seccomp=unconfined",
+        "--shm-size=512m"
+    ],
+    "mounts": [
+        "source=${localWorkspaceFolder}/../cache/iron/build,target=/home/ubuntu/build,type=bind",
+        "source=${localWorkspaceFolder}/../cache/iron/install,target=/home/ubuntu/install,type=bind",
+        "source=${localWorkspaceFolder}/../cache/iron/log,target=/home/ubuntu/log,type=bind"
+    ],
+    "postCreateCommand": "sh /entrypoint.sh"
+}
